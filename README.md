@@ -1,6 +1,6 @@
-# Welding Sequence Analysis: Clustering Multivariate Time Series
+# Welding Sequence Analysis
 
-Unsupervised analysis of industrial resistance-welding data. Each welding cycle is extracted from raw machine signals, normalised to a common length, reduced with PCA and grouped with K-Means to find typical and atypical welds.
+This project was developed as part of the **Data Science 2** course at **Hochschule Hannover (University of Applied Sciences and Arts)**.
 
 ## Overview
 
