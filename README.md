@@ -4,7 +4,9 @@ This repository was developed as part of the **Data Science 2** course at **Hoch
 
 ## Overview
 
-The dataset contains **63 features** in 14 daily Parquet files. Contiguous periods where the signal *Schweißen EIN* (welding ON) is active are treated as one welding sequence, which gives **383 sequences**.
+The dataset consists of **14** daily Parquet files containing **63** features. The objective of this project is to identify patterns and similarities between welding sequences using dimensionality reduction and unsupervised clustering.
+
+Consecutive time intervals during which the `Schweißen EIN` (welding ON) signal is active are grouped into individual welding sequences, resulting in **383** sequences.
 
 ## What was done
 
