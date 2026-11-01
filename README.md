@@ -94,8 +94,9 @@ Some translations (`HKS`, `Schränkung`, `SBE`/`SE`) are my best interpretation 
 
 ## Results
 
-### Dimensionality reduction
+### Next steps
 
+<<<<<<< HEAD
 160 principal components are needed to explain at least 95% of the total variance of the 383 resampled sequences, so the variance is spread over many components. Projected onto PC1 and PC2, the sequences form two well-separated groups (PC1 < 0 and PC1 > 0). The right-hand group has more internal structure and splits into an upper and a lower part along PC2.
 
 | Cumulative explained variance | Sequences in PC1 / PC2 |
@@ -206,3 +207,8 @@ Outlier:
 - t-SNE and UMAP were run with a single parameter setting. Varying `perplexity` and `n_neighbors` would show how stable the structure is.
 - DBSCAN was run on 160 dimensions, where distances become less informative. It could be repeated on a lower-dimensional embedding.
 - Only one feature was plotted for the inspected pairs. The isolated sequences found by DBSCAN and the dendrogram (e.g. 282, 283, 88) should be compared with the outlier chosen in PCA space.
+=======
+- Evaluate t-SNE and UMAP as alternatives to PCA to investigate whether they reveal additional structures, local similarities, or clusters within the welding sequences.
+- Examine the original and interpolated signals of the nearest and farthest sequence pairs in PCA space, as well as a potential outlier.
+- Use the silhouette score alongside the elbow method.
+>>>>>>> 23ba3f1ae0badfa0b07cae7d79e0300419560735
