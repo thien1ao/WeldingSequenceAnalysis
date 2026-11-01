@@ -8,79 +8,6 @@ The dataset consists of **14** daily Parquet files containing **63** features. T
 
 Consecutive time intervals during which the `Schweißen EIN` (welding ON) signal is active are grouped into individual welding sequences, resulting in **383** sequences.
 
-## Data overview
-
-Each Parquet file holds one day of machine data (timestamp resolution: milliseconds). Column names follow the pattern `[<PLC id>:<index>] <German description> (<PLC address>)`. The columns are grouped below with English translations. `Schweißen EIN` is the signal used to cut the recording into sequences. It is not used as a feature.
-
-| Group | Columns | Type | Examples (German → English) |
-|---|---|---|---|
-| Time | 1 | timestamp | `Time` → timestamp |
-| Supply / welding electrical | 8 | float | `Einspeisung L1 Strom Istwert` → supply L1 current (actual) |
-| Welding current control | ~20 | float | `Schweißstromregelung: Reglerausgang` → welding current control: controller output |
-| Smoothing pressure control | ~7 | float | `Glättdruckregelung: Druckistwert Glättrollen` → smoothing pressure control: actual pressure of smoothing rollers |
-| Table adjustment | ~10 | float | `Tischverstellung Überlapptisch Überlappung Istwert` → overlap table adjustment: overlap (actual) |
-| Strip / material data | 8 | float | `Dicke Band Einlauf` → strip thickness (inlet) |
-| Pressure / hydraulics | ~6 | float | `Istwert Luftdruck am Schweißrollenzylinder` → actual air pressure at the welding roller cylinder |
-| Setpoints (HMI) | 4 | float | `MP377: Schweißkraft Sollwert` → HMI: welding force setpoint |
-| Drive | 2 | float | `Antrieb C-Wagen Istposition in mm` → C-carriage drive actual position (mm) |
-| Binary signals | 7 | bool | `Schweißen EIN` → welding ON |
-
-The group sizes marked `~` are approximate. The exact list is available in the notebook via `schema`.
-
-### German–English glossary
-
-| German | English |
-|---|---|
-| Schweißen / Schweißmaschine | welding / welding machine |
-| Schweißen EIN | welding ON |
-| Schweißstrom | welding current |
-| Schweißspannung | welding voltage |
-| Schweißkraft | welding force |
-| Schweißgeschwindigkeit | welding speed |
-| Schweißrolle(n) / Schweißrollendruck | welding roller(s) / welding roller pressure |
-| Einspeisung | supply (mains feed) |
-| Strom / Spannung | current / voltage |
-| Istwert | actual value |
-| Sollwert | setpoint (target value) |
-| Grundsollwert | base setpoint |
-| skaliert / normiert | scaled / normalised |
-| Regler / Reglerausgang | controller / controller output |
-| Reglerdifferenz | control error (setpoint minus actual) |
-| Reglerfreigabe | controller enable |
-| I-Anteil / P-Anteil | integral / proportional component |
-| Schweißstromregelung | welding current control |
-| Glättrolle / Glättkraft | smoothing roller / smoothing force |
-| Glättdruckregelung | smoothing pressure control |
-| Druck / Luftdruck | pressure / air pressure |
-| Druckregelventil / Prop_-Ventil | pressure control valve / proportional valve |
-| Netz | (air) supply network |
-| Stromschiene oben | busbar, top |
-| Temperatur Start Schweißen | temperature at start of welding |
-| Shunt / HKS | shunt / HKS (measurement point of the secondary circuit, as labelled in the data) |
-| Zuführung / Rückführung | feed / return |
-| Differenz | difference |
-| Antrieb | drive |
-| C-Wagen | C-carriage |
-| Istposition | actual position |
-| V-Ist | actual velocity |
-| Tischverstellung | table adjustment |
-| Überlapptisch / Kipptisch | overlap table / tilting table |
-| Ausspannlänge | free clamping length (stick-out) |
-| Überlappung | overlap |
-| Schränkung | offset (lateral misalignment of strip edges) |
-| Hydraulikzylinder Kolbenseite / Flächenseite | hydraulic cylinder, piston side / cap side |
-| Druckmessung | pressure measurement |
-| Band Einlauf / Auslauf | strip inlet / outlet |
-| Dicke / Breite | thickness / width |
-| Materialnummer | material number |
-| Kohlenstoffgehalt | carbon content |
-| ist unten / ist auf / ist ab | is down / is on / is off |
-| Softwareschalter | software switch |
-| Geschweißt Relais | "welded" relay |
-| Glaettrolle ist auf SBE / ab SE | smoothing roller is at strip start (SBE) / at strip end (SE) |
-
-Some translations (`HKS`, `Schränkung`, `SBE`/`SE`) are my best interpretation and should be checked against the machine documentation.
-
 ## Methodology
 
 1. **Sequence extraction**: Identify welding sequences using the binary `Schweißen EIN`  signal. Consecutive active intervals are treated as one continuous welding sequence.
@@ -94,9 +21,6 @@ Some translations (`HKS`, `Schränkung`, `SBE`/`SE`) are my best interpretation 
 
 ## Results
 
-### Next steps
-
-<<<<<<< HEAD
 160 principal components are needed to explain at least 95% of the total variance of the 383 resampled sequences, so the variance is spread over many components. Projected onto PC1 and PC2, the sequences form two well-separated groups (PC1 < 0 and PC1 > 0). The right-hand group has more internal structure and splits into an upper and a lower part along PC2.
 
 | Cumulative explained variance | Sequences in PC1 / PC2 |
